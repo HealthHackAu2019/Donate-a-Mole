@@ -35,16 +35,16 @@ def test():
 @manager.command
 def drop_all():
     """Drop appropriate tables."""
-    User.__table__.drop()
-    Role.__table__.drop()
-    Mole.__table__.drop()
+    User.__table__.drop(db)
+    Role.__table__.drop(db)
+    Mole.__table__.drop(db)
     db.create_all()
     db.session.commit()
 
 @manager.command
 def drop_mole():
     """Drop mole table."""
-    Mole.__table__.drop()
+    Mole.__table__.drop(db)
     db.create_all()
     db.session.commit()
 
