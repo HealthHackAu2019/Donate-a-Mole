@@ -6,8 +6,8 @@ After=network.target
 User=www-data
 Group=www-data
 WorkingDirectory=/var/www/dam
-Environment="PATH=/sw/miniconda2/envs/dam/bin"
-ExecStart=/sw/miniconda2/envs/dam/bin/honcho start -e config.env -f Local
+Environment="PATH=/sw/miniconda3/envs/dam/bin"
+ExecStart=/sw/miniconda3/envs/dam/bin/honcho start -e config.env -f Local
 
 [Install]
 WantedBy=multi-user.target
