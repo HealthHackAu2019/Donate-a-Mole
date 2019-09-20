@@ -57,6 +57,7 @@ class User(UserMixin, db.Model):
 
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
+        self.confirmed = True # quick disable user confirmations, save for research signin
         if self.role is None:
             if self.email == current_app.config['ADMIN_EMAIL']:
                 self.role = Role.query.filter_by(

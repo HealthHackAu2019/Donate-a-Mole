@@ -23,8 +23,11 @@ class Sex(Enum):
     OTHER = 3
     NA = 4
 
+class Ancestry:
+  values = []
+
 class BodyLocation():
-    defaults = ["We're going to use Leaflet.JS", "It's a custom map", "I promise we're working on it"]
+    defaults = ["We're going to use Leaflet.JS", "With a custom map of avatar bodies", "I promise we're working on it!"]
 
 class Mole(db.Model):
     id = db.Column(db.Integer, primary_key=True)

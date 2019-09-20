@@ -11,6 +11,7 @@ from flask_wtf import CSRFProtect
 
 from app.assets import app_css, app_js, vendor_css, vendor_js
 from config import config as Config
+import logging
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -18,6 +19,11 @@ mail = Mail()
 db = SQLAlchemy()
 csrf = CSRFProtect()
 compress = Compress()
+
+# Set up logging
+logging.basicConfig(filename='dam.log', format='%(asctime)s - %(message)s', level=logging.INFO)
+logger = logging.getLogger('DaM')
+logger.info('Donate a Mole started')
 
 # Set up Flask-Login
 login_manager = LoginManager()
