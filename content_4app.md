@@ -42,4 +42,9 @@ Gather data: take a photo of your moles on your body, tag the location to help f
 
 A citizen scientist is a person who helps researchers gather or interpret data, especially for large data sets that would have been impossible to collect or sift through in the past. We need your help to collect as many moles and their locations to create the HOTSPOT map. 
 
+## Privacy statement:
+Donate a Mole is bound by Commonwealth and State privacy legislation, including the Privacy Act 1988 (Commonwealth) and the Information Privacy Act 2009 (Queensland). In addition, the application must adhere to the guidelines of the National Health and Medical Research Council of Australia, Medicare Australia and is also accountable to The University of Queensland-Human Research Ethics Committee.
 
+
+## Wording for consent:
+I give permission for my doctors, other health professionals, hospitals, Qld Cancer Registry or pathology laboratories outside to release information, for example pathology reports, to The University of Queensland concerning my lesion excision that is needed for this project. Additionally, I give my permission for Qld Cancer Registry to release pathology reports regarding my previous melanoma diagnosis and other types of invasive cancers.
