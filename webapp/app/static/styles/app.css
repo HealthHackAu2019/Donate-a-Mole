@@ -57,8 +57,13 @@ table.selectable tr:hover {
   background-color: #008ba3;
 }
 
-.locator .locatorImage {
+.locator {
   width: 150px;
+  margin: auto;
+}
+
+.locatorImage {
+  width: 150px !important;
   margin: auto;
 }
 
@@ -80,11 +85,13 @@ table.selectable tr:hover {
 .bodyori {
   display: inline !important;
   margin-top: 340px !important;
-;
+  z-index: 100;
 }
 
 .locDiv {
   display: inline !important;
+  z-index: -1;
+  width: 150px;
 }
 
 #donateRoot {
