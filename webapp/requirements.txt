@@ -17,6 +17,7 @@ Flask-RQ==0.2
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.4.0
 Flask-SSLify==0.1.5
+Flask-Uploads===0.2.1
 Flask-WTF==0.14.2
 geopy==1.20.0
 geopandas==0.5.1

@@ -42,6 +42,10 @@ class Config:
     # Geo services
     OPENMAP_KEY = os.environ.get('OPENMAP_KEY', '')
 
+    # reCAPTCHA
+    RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
+    RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
+
     # Admin account
     ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'password')
     ADMIN_EMAIL = os.environ.get(

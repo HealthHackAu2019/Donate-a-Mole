@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 
 from app.models import EditableHTML
+from .forms import MoleForm
 
 main = Blueprint('main', __name__)
 
@@ -24,6 +25,12 @@ def privacy():
 
 @main.route('/donate')
 def donate():
-    editable_html_obj = EditableHTML.get_editable_html('donate')
+    form = MoleForm()
     return render_template(
-        'main/donate.html', editable_html_obj=editable_html_obj)
+        'main/donate.html', form=form)
+
+@main.route('/donate2')
+def donate2():
+    form = MoleForm()
+    return render_template(
+        'main/donate2.html', form=form)

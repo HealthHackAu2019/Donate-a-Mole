@@ -1,7 +1,6 @@
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import BadSignature, SignatureExpired
 from geopy.geocoders import OpenMapQuest
-from enum import Enum
 from datetime import datetime
 
 from config import Config
@@ -17,16 +16,19 @@ def get_suburb_state(latitude, longitude):
     except:
         return ("NA", "NA")
 
-class Sex(Enum):
-    FEMALE = 1
-    MALE = 2
-    OTHER = 3
-    NA = 4
+class Sex:
+    values = ['Female', 'Male', 'Not Specified']
 
 class Ancestry:
-  values = []
+    values = ['Not Specified', 'European', 'Other']
 
-class BodyLocation():
+class NumNaevi:
+    values = ['Few', 'Some', 'Many']
+
+class History:
+    values = ['Not Specified', 'Yes', 'No']
+
+class BodyLocation:
     defaults = ["We're going to use Leaflet.JS", "With a custom map of avatar bodies", "I promise we're working on it!"]
 
 class Mole(db.Model):
@@ -34,13 +36,18 @@ class Mole(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     sex = db.Column(db.Integer)
     age = db.Column(db.Integer)
+    ancestry = db.Column(db.Integer)
     body_location = db.Column(db.String(32))
     geo_long = db.Column(db.String(32))
     geo_lat = db.Column(db.String(32))
     geo_suburb = db.Column(db.String(32))
     geo_state = db.Column(db.String(16))
+    personal_history = db.Column(db.Integer)
+    family_history = db.Column(db.Integer)
     image_path = db.Column(db.String(64))
     pathology = db.Column(db.String(2048))
+    contact_research = db.Column(db.Boolean)
+    number_naevi = db.Column(db.Integer)
     date_submitted = db.Column(db.String(16))
 
     def __init__(self, **kwargs):
@@ -103,13 +110,16 @@ class Mole(db.Model):
         for i in range(count):
             m = Mole(
                 user_id=random.choice(users).id,
-                sex=random.randint(1, len(Sex)),
+                sex=random.choice(Sex.values),
                 age=random.randint(18, 100),
                 body_location=random.choice(BodyLocation.defaults),
                 geo_lat=str(points[i].y),
                 geo_long=str(points[i].x),
                 image_path=random.choice(example_pics),
                 pathology=fake.sentence(ext_word_list=path_word_list),
+                personal_history=random.choice([True, False]),
+                family_history=random.choice([True, False]),
+                contact_research=False,
                 date_submitted=str(random_date(d1, d2)),
                 **kwargs)
             db.session.add(m)
