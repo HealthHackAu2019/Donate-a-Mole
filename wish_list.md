@@ -8,13 +8,13 @@
 * Number of naevi (none/few/some/many) with images
  
 #### Optional: Do you want to be contacted about participation in upcoming research studies?
- *If so: Name, email
+ * If so: Name, email
 
 #### Regarding the mole
-*Location of where the mole they images – mark on body image or avatar?
-*Is this lesion being excised?
-*If so: consent for us to request pathology report?
- 		*If Yes: Name, DOB, email, 
+* Location of where the mole they images – mark on body image or avatar?
+* Is this lesion being excised?
+* If so: consent for us to request pathology report?
+ 		* If Yes: Name, DOB, email, 
 
 ### Privacy statement:
 Donate a Mole is bound by Commonwealth and State privacy legislation, including the Privacy Act 1988 (Commonwealth) and the Information Privacy Act 2009 (Queensland). In addition, the application must adhere to the guidelines of the National Health and Medical Research Council of Australia, Medicare Australia and is also accountable to The University of Queensland-Human Research Ethics Committee.
