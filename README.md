@@ -132,4 +132,9 @@ honcho start -e config.env -f Local
 ## Extra Files
 
 * dam.service: systemd service file
-* dam.nginx: nginx reverse proxy configuration (TBD)
+* dam.nginx: nginx reverse proxy configuration
+
+## Mandatory fields
+* sex
+* age
+* location
