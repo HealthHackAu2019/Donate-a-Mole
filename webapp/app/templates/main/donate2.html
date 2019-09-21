@@ -8,7 +8,7 @@
       <h2 class="ui dividing header">Donate a Mole</h2>
       <noscript>You need to enable JavaScript to run this app.</noscript>
       <div id="donateRoot"></div>
-      
+
       {% set flashes = {
           'error':   get_flashed_messages(category_filter=['form-error']),
           'warning': get_flashed_messages(category_filter=['form-check-email']),
@@ -84,7 +84,7 @@
       </div>
 
       {{ f.end_form(form) }}
-          
+      
     </div>
   </div>
 
@@ -124,7 +124,7 @@
       .delay(2000)
       .transition('horizontal flip', '500ms')
     ;
-    // else set 
+    // else set
     // ... and run a function that displays the correct step indicator:
     fixStepIndicator(n)
   }
@@ -185,15 +185,15 @@
     function previewImg(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
-        
+
         reader.onload = function(e) {
           $('#imgpreview').attr('src', e.target.result);
         }
-        
+
         reader.readAsDataURL(input.files[0]);
       }
     }
-    
+
     $("#image").change(function() {
       previewImg(this);
     });

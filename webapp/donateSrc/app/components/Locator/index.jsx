@@ -26,21 +26,32 @@ const Locator = ({ gender, orientation }) => {
     setPointerY(relY);
     setPointerD('block')
 
-    console.log('mole X: ', relX - (parentEl.current.offsetWidth / 2));
-    console.log('mole Y: ', relY - (parentEl.current.offsetHeight / 2));
+    // move the origin of the coordinates to be relative to the center
+    // of the body image.
+    const bodyX = relX - (parentEl.current.offsetWidth / 2);
+    const bodyY = relY - (parentEl.current.offsetHeight / 2);
+
+    // console.log('mole X: ', bodyX);
+    // console.log('mole Y: ', bodyY);
+
+    const bodyLocationField = document.getElementById('body_location');
+    const bodyImageField = document.getElementById('body_image');
+
+    if (bodyLocationField) bodyLocationField.value = `${bodyX}, ${bodyY}`;
+    if (bodyImageField) bodyImageField.value = `${gender}-${orientation}`;
   };
 
   return (
     <div className="locator" onClick={handleClick} ref={parentEl}>
       <div className="locatorImage">
-        {gender === 'female' && orientation == 'front' && <FemaleFront />}
-        {gender === 'female' && orientation == 'back' && <FemaleBack />}
-        {gender === 'female' && orientation == 'left' && <FemaleLeft />}
-        {gender === 'female' && orientation == 'right' && <FemaleRight />}
-        {gender === 'male' && orientation == 'front' && <MaleFront />}
-        {gender === 'male' && orientation == 'back' && <MaleBack />}
-        {gender === 'male' && orientation == 'left' && <MaleLeft />}
-        {gender === 'male' && orientation == 'right' && <MaleRight />}
+        {gender === 'female' && orientation === 'front' && <FemaleFront />}
+        {gender === 'female' && orientation === 'back' && <FemaleBack />}
+        {gender === 'female' && orientation === 'left' && <FemaleLeft />}
+        {gender === 'female' && orientation === 'right' && <FemaleRight />}
+        {gender === 'male' && orientation === 'front' && <MaleFront />}
+        {gender === 'male' && orientation === 'back' && <MaleBack />}
+        {gender === 'male' && orientation === 'left' && <MaleLeft />}
+        {gender === 'male' && orientation === 'right' && <MaleRight />}
       </div>
       <Pointer className="locatorPointer" style={{ display: pointerD, top: pointerY, left: pointerX }}/>
     </div>

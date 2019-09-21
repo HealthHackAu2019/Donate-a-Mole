@@ -80,11 +80,17 @@ table.selectable tr:hover {
 .bodyori {
   display: inline !important;
   margin-top: 340px !important;
-;
 }
 
+.locatorFlex {
+  display: flex;
+  align-items: end;
+}
+.locatorFlex > .button {
+  margin-right: 0;
+}
 .locDiv {
-  display: inline !important;
+  flex-grow: 1;
 }
 
 #donateRoot {
