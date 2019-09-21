@@ -7,11 +7,16 @@ import MaleFront from '../Svg/MaleFront.svg';
 import FemaleFront from '../Svg/FemaleFront.svg';
 import MaleBack from '../Svg/MaleBack.svg';
 import FemaleBack from '../Svg/FemaleBack.svg';
+import MaleLeft from '../Svg/MaleLeft.svg';
+import FemaleLeft from '../Svg/FemaleLeft.svg';
+import MaleRight from '../Svg/MaleRight.svg';
+import FemaleRight from '../Svg/FemaleRight.svg';
 
-const Locator = ({ gender, isFront }) => {
+const Locator = ({ gender, orientation }) => {
   const parentEl = useRef(null);
   const [pointerX, setPointerX] = useState(0);
   const [pointerY, setPointerY] = useState(0);
+  const [pointerD, setPointerD] = useState('none');
 
   const handleClick = (e) => {
     const relX = e.nativeEvent.pageX - parentEl.current.offsetLeft;
@@ -19,6 +24,7 @@ const Locator = ({ gender, isFront }) => {
 
     setPointerX(relX);
     setPointerY(relY);
+    setPointerD('block')
 
     console.log('mole X: ', relX - (parentEl.current.offsetWidth / 2));
     console.log('mole Y: ', relY - (parentEl.current.offsetHeight / 2));
@@ -27,24 +33,28 @@ const Locator = ({ gender, isFront }) => {
   return (
     <div className="locator" onClick={handleClick} ref={parentEl}>
       <div className="locatorImage">
-        {gender === 'female' && isFront && <FemaleFront />}
-        {gender === 'female' && !isFront && <FemaleBack />}
-        {gender === 'male' && isFront && <MaleFront />}
-        {gender === 'male' && !isFront && <MaleBack />}
+        {gender === 'female' && orientation == 'front' && <FemaleFront />}
+        {gender === 'female' && orientation == 'back' && <FemaleBack />}
+        {gender === 'female' && orientation == 'left' && <FemaleLeft />}
+        {gender === 'female' && orientation == 'right' && <FemaleRight />}
+        {gender === 'male' && orientation == 'front' && <MaleFront />}
+        {gender === 'male' && orientation == 'back' && <MaleBack />}
+        {gender === 'male' && orientation == 'left' && <MaleLeft />}
+        {gender === 'male' && orientation == 'right' && <MaleRight />}
       </div>
-      <Pointer style={{ top: pointerY, left: pointerX }}/>
+      <Pointer className="locatorPointer" style={{ display: pointerD, top: pointerY, left: pointerX }}/>
     </div>
   );
 }
 
 Locator.propTypes = {
   gender: PropTypes.oneOf(['male', 'female']),
-  isFront: PropTypes.bool,
+  orientation: PropTypes.oneOf(['front', 'back', 'left', 'right']),
 };
 
 Locator.defaultProps = {
   gender: 'female',
-  isFront: false,
+  orientation: 'front',
 };
 
 export default Locator;

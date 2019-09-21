@@ -2,14 +2,24 @@ import React, { useState } from 'react';
 import Locator from '../Locator/index.jsx';
 
 const DEFAULT_GENDER = 'female';
+const DEFAULT_ORIENTATION = 'front';
 
 const LocatorPage = () => {
-  const [isFront, setIsFront] = useState(true);
+  const [orientation, setOrientation] = useState(DEFAULT_ORIENTATION);
   const [gender, setGender] = useState(DEFAULT_GENDER);
   const isFemale = gender === 'female';
+  const isFront = orientation === 'front';
 
-  const toggleIsFront = () => {
-    setIsFront(!isFront);
+  const toggleFrontOrientation = () => {
+    setOrientation(isFront ? 'back' : 'front');
+  };
+
+  const toggleLeft = () => {
+    setOrientation('left');
+  };
+
+  const toggleRight = () => {
+    setOrientation('right');
   };
 
   const toggleGender = () => {
@@ -17,13 +27,21 @@ const LocatorPage = () => {
   }
 
   return (
-    <div>
-      <Locator isFront={isFront} gender={gender} />
-      <button onClick={toggleIsFront}>
-        Change to {isFront ? 'back' : 'front'}
+    <div className="locatorPage">
+      <button className="left floated ui primary button bodyori" onClick={toggleLeft}>
+        Spin Left
       </button>
-      <br/><br/>
-      <button onClick={toggleGender}>
+      <button className="right floated ui primary button bodyori" onClick={toggleRight}>
+        Spin Right
+      </button>
+      <div className="locDiv">
+        <Locator orientation={orientation} gender={gender} />
+      </div>
+      <button className="ui primary fluid button" onClick={toggleFrontOrientation}>
+        Change to {orientation === 'front' ? 'back' : 'front'}
+      </button>
+      <br></br>
+      <button className="ui primary fluid button" onClick={toggleGender}>
         Change to {gender === 'female' ? 'male' : 'female'}
       </button>
     </div>

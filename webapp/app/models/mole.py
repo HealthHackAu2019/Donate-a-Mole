@@ -23,7 +23,7 @@ class Ancestry:
     values = ['Not Specified', 'European', 'Other']
 
 class NumNaevi:
-    values = ['Few', 'Some', 'Many']
+    values = ['Few (1-20)', 'Some (21-50)', 'Many (50+)']
 
 class History:
     values = ['Not Specified', 'Yes', 'No']

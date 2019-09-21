@@ -23,3 +23,70 @@ nav .mobile.only.row .ui.vertical.menu {
 table.selectable tr:hover {
   cursor: pointer !important;
 }
+
+.mole.preview {
+  width: 80px;
+}
+
+.moletab {
+  display: none;
+  position: absolute;
+  width: 100%;
+}
+
+.moletab.bodyTab {
+  position: relative;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  background-color: #008ba3;
+}
+
+.step.finish {
+  background-color: #008ba3;
+}
+
+.locator .locatorImage {
+  width: 150px;
+  margin: auto;
+}
+
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content {
+  flex: 1;
+}
+
+#imgpreview {
+  margin: auto;
+  max-width: 300px;
+}
+
+.bodyori {
+  display: inline !important;
+  margin-top: 340px !important;
+;
+}
+
+.locDiv {
+  display: inline !important;
+}
+
+#donateRoot {
+  display: none;
+}
