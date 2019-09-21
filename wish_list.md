@@ -18,7 +18,7 @@
 
 ### Privacy statement:
 Donate a Mole is bound by Commonwealth and State privacy legislation, including the Privacy Act 1988 (Commonwealth) and the Information Privacy Act 2009 (Queensland). In addition, the application must adhere to the guidelines of the National Health and Medical Research Council of Australia, Medicare Australia and is also accountable to The University of Queensland-Human Research Ethics Committee.
-??Also, do we need a full privacy policy, or can awe report something smaller and link to the DRC website- like this:
+* ??Also, do we need a full privacy policy, or can awe report something smaller and link to the DRC website- like this:
 
 
 
