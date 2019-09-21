@@ -1,0 +1,20 @@
+.pointer {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  box-sizing: border-box;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+}
+
+.pointer::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  left: -10px;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}

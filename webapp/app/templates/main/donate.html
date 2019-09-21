@@ -4,5 +4,8 @@
 {% block content %}
     <div class="ui text container">
         <h1>Donate a Mole</h1>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="donateRoot"></div>
     </div>
+    <script src="{{ url_for('static', filename='donate/donate_bundle.js') }}"></script>
 {% endblock %}

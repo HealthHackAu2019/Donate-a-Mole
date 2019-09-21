@@ -16,3 +16,4 @@ dump.rdb
 .vscode/
 Client Info/
 *.log
+webapp/donateSrc/node_modules
