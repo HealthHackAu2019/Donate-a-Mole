@@ -29,7 +29,8 @@ class MoleForm(FlaskForm):
         validators=[Optional()],
         choices=[(i, v) for i, v in enumerate(Ancestry.values)])
     
-    body_location = HiddenField(validators=[InputRequired()])
+    body_location = StringField(description="NONE", validators=[InputRequired()])
+    body_image = StringField(description="NONE", validators=[InputRequired()])
 
     personal_history = SelectField(
         'Personal history of melanoma',
@@ -44,8 +45,8 @@ class MoleForm(FlaskForm):
     image = FileField(validators=[FileAllowed(images, 'Images only!')], render_kw={"accept": "image/*", "capture": "environment"})
 
     location = StringField("Postcode", validators=[Optional()])
-    geo_long = HiddenField()
-    geo_lat = HiddenField()
+    geo_long = StringField()
+    geo_lat = StringField()
 
     contact_research = BooleanField(default=False)
     pathology = StringField('Pathology', validators=[Optional()])

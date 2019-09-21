@@ -17,7 +17,7 @@ def get_suburb_state(latitude, longitude):
         return ("NA", "NA")
 
 class Sex:
-    values = ['Female', 'Male', 'Not Specified']
+    values = ['Not Specified', 'Female', 'Male']
 
 class Ancestry:
     values = ['Not Specified', 'European', 'Other']

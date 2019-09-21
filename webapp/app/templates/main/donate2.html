@@ -5,9 +5,10 @@
 {% block content %}
   <div class="Site-content ui text container">
 <!--    <div class="eight wide computer sixteen wide mobile centered column"> -->
-      <h2 class="ui dividing header">Donate a Mole</h2>
       <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div id="donateRoot"></div>
+      <div id="donateRoot">
+          <h2>Hotspot your mole</h2>
+      </div>
       
       {% set flashes = {
           'error':   get_flashed_messages(category_filter=['form-error']),
@@ -16,36 +17,34 @@
           'success': get_flashed_messages(category_filter=['form-success'])
       } %}
 
-      {{ f.begin_form(form, flashes, enctype="multipart/form-data") }}
+      {{ f.begin_form(form, flashes) }}
 
       <div class="moletab 0">
-        <h3>Info Heading</h3>
+        <h2>Info Heading</h2>
         {{ lipsum(2) }}
-        <button onclick="nextPrev(1)" class="ui primary fluid button">Next</button>
       </div>
 
       <div class="moletab 1">
-        <h3>Take a Picture</h3>
+        <h2>Take a Picture</h2>
         {{ lipsum(1) }}
         {{ f.render_form_field(form.image) }}
         <img class="center" id="imgpreview" src="#" alt="Upload" />
-        <button onclick="nextPrev(1)" class="ui primary fluid button">Next</button>
       </div>
 
       <div class="moletab 2 bodyTab">
-        <h3>Hotspot your mole</h3>
+        
         {{ f.render_form_field(form.body_location) }}
-        <button onclick="nextPrev(1)" class="ui primary fluid button">Next</button>
+        {{ f.render_form_field(form.body_image) }}
       </div>
 
       <div class="moletab 3">
-        <h3>Confirm</h3>
+        <h2>Confirm</h2>
         {{ lipsum(1) }}
-        <button onclick="nextPrev(1)" class="ui primary fluid button">Next</button>
+        <button onclick="newMole()" class="ui primary fluid button">Donate another Mole</button>
       </div>
 
       <div class="moletab 4">
-        <h3>Help us complete the picture</h3>
+        <h2>Help us complete the picture</h2>
         {{ f.render_form_field(form.age) }}
         {{ f.render_form_field(form.sex) }}
         {{ f.render_form_field(form.location) }}
@@ -56,31 +55,29 @@
         </div>
 
         {{ f.render_form_field(form.ancestry) }}
-        {{ f.render_form_field(form.personal_history) }}
-        {{ f.render_form_field(form.family_history) }}
-        {{ f.render_form_field(form.pathology) }}
-        <div class="ui animated button" tabindex="0">
-          <div class="visible content">Next</div>
-          <div class="hidden content">
-            <i class="right arrow icon"></i>
-          </div>
-        </div>
-        <button onclick="nextPrev(1)" class="ui primary fluid button">Next</button>
+
       </div>
 
       <div class="moletab 5">
-        <h3>Consent</h3>
-        {{ lipsum(1) }}
-        {% for field in form | selectattr('type', 'equalto', 'SubmitField') %}
-            {{ f.render_form_field(field) }}
-        {% endfor %}
-        <button onclick="nextPrev(1)" class="ui primary fluid button">Next</button>
-      </div>
+          <h2>Almost there!</h2>
+
+          {{ f.render_form_field(form.personal_history) }}
+          {{ f.render_form_field(form.family_history) }}
+          {{ f.render_form_field(form.pathology) }}
+  
+        </div>
 
       <div class="moletab 6">
-        <h3>Thank you</h3>
+        <h2>Consent</h2>
         {{ lipsum(1) }}
-        <button onclick="nextPrev(1)" class="ui primary fluid button">Next</button>
+        
+        <button onclick="nextPrev(1)" class="ui primary fluid button">I Disagree</button>
+      </div>
+
+      <div class="moletab 7">
+        <h2>Thank you</h2>
+        {{ lipsum(1) }}
+        <h4>Share</h4>
       </div>
 
       {{ f.end_form(form) }}
@@ -88,8 +85,14 @@
     </div>
   </div>
 
+  <footer style="text-align:center;margin-top:40px;margin-bottom:10px;">
+    <div class="ui text container">
+      <button id="footerBtn" onclick="nextProcess()" class="ui primary fluid button">Next</button>
+    </div>
+  </footer>
   <!-- Circles which indicates the steps of the form: -->
-  <footer style="text-align:center;margin-top:40px;margin-bottom:40px;">
+  <footer style="text-align:center;margin-top:10px;margin-bottom:40px;">
+    <span class="step"></span>
     <span class="step"></span>
     <span class="step"></span>
     <span class="step"></span>
@@ -102,6 +105,15 @@
 <script>
   var currentTab = 0; // Current tab is set to be the first tab (0)
   prepTab(currentTab); // Display the current tab
+
+  function newMole() {
+    /// blah
+    nextPrev(-2)
+  }
+
+  function nextProcess() {
+    nextPrev(1);
+  }
 
   function prepTab(n) {
     $(".moletab."+n)
@@ -137,6 +149,9 @@
     //x[currentTab].style.display = "none";
     $(".moletab."+currentTab)
       .transition('horizontal flip')
+    ;
+    if (currentTab == 2) $("#donateRoot")
+      .transition('horizontal flip', '100ms')
     ;
     // Increase or decrease the current tab by 1:
     currentTab = currentTab + n;

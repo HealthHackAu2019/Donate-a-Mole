@@ -28,9 +28,3 @@ def donate():
     form = MoleForm()
     return render_template(
         'main/donate.html', form=form)
-
-@main.route('/donate2')
-def donate2():
-    form = MoleForm()
-    return render_template(
-        'main/donate2.html', form=form)

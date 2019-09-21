@@ -42,7 +42,7 @@ const LocatorPage = () => {
       </button>
       <br></br>
       <button className="ui primary fluid button" onClick={toggleGender}>
-        Change to {gender === 'female' ? 'male' : 'female'}
+        Swap Avatar
       </button>
     </div>
   );

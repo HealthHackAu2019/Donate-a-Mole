@@ -1,11 +1,13 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-    <div class="ui text container">
-      <h1>Welcome{% if not (current_user.is_authenticated) %}{% else %} {{ current_user.full_name() }} {% endif %}!</h1>
+  <div class="Site-content ui text container">
+      <h2>get started</h1>
 
-        <p>Donate-A-Mole is a Health Hack 2019 project.</p>
+       <p>{{ lipsum(1) }}</p>
 
-        <p>{{ lipsum(1) }}</p>
+       <a href="{{ url_for('main.donate') }}">
+        <div class="ui primary fluid button">Donate a Mole</div>
+      </a>
     </div>
 {% endblock %}

@@ -28,6 +28,20 @@ const Locator = ({ gender, orientation }) => {
 
     console.log('mole X: ', relX - (parentEl.current.offsetWidth / 2));
     console.log('mole Y: ', relY - (parentEl.current.offsetHeight / 2));
+
+    // move the origin of the coordinates to be relative to the center
+    // of the body image.
+    const bodyX = relX - (parentEl.current.offsetWidth / 2);
+    const bodyY = relY - (parentEl.current.offsetHeight / 2);
+
+    // console.log('mole X: ', bodyX);
+    // console.log('mole Y: ', bodyY);
+
+    const bodyLocationField = document.getElementById('body_location');
+    const bodyImageField = document.getElementById('body_image');
+
+    if (bodyLocationField) bodyLocationField.value = `${bodyX}, ${bodyY}`;
+    if (bodyImageField) bodyImageField.value = `${gender}-${orientation}`;
   };
 
   return (
