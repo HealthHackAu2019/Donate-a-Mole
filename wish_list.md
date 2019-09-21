@@ -57,5 +57,22 @@ What are the groups thoughts on the following:
 Also, do we need a full privacy policy, or can awe report something smaller and link to the DRC website- like this:
 
 
+```bash
+conda create -n dam -c conda-forge python=3 redis nodejs
+conda activate dam
+npm install -g sass
+apt install libpq-dev build-essential
+pip install -r requirements.txt
 
+# once off db creation, data population
+python manage.py recreate_db
+python manage.py setup_dev
+python manage.py add_fake_data
+
+# management for dev changing schemas e.g.
+python manage.py drop_all
+python manage.py drop_mole
+
+honcho start -e config.env -f Local
+```
 
