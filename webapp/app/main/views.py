@@ -26,4 +26,4 @@ def privacy():
 def donate():
     editable_html_obj = EditableHTML.get_editable_html('donate')
     return render_template(
-        'main/privacy.html', editable_html_obj=editable_html_obj)
+        'main/donate.html', editable_html_obj=editable_html_obj)
