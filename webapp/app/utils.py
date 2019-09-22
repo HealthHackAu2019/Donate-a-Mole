@@ -2,7 +2,7 @@ from flask import url_for
 from wtforms.fields import Field
 from wtforms.widgets import HiddenInput
 from wtforms.compat import text_type
-import pyowm
+#import pyowm
 
 def register_template_utils(app):
     """Register Jinja 2 helpers (called from __init__.py)."""
@@ -18,11 +18,11 @@ def register_template_utils(app):
 
     app.add_template_global(index_for_role)
 
-def getUVIndex(lat, lon):
-    owmAPIKey = '6421ec79e0b614c4dfc21d6afbb15494'
-    owm = pyowm.OWM(owmAPIKey)
-    uvData = owm.uvindex_around_coords(lat,lon)
-    return print('The UV index at your present location is ',uvData._value)
+# def getUVIndex(lat, lon):
+#     owmAPIKey = '6421ec79e0b614c4dfc21d6afbb15494'
+#     owm = pyowm.OWM(owmAPIKey)
+#     uvData = owm.uvindex_around_coords(lat,lon)
+#     return print('The UV index at your present location is ',uvData._value)
         
 def index_for_role(role):
     return url_for(role.index)
