@@ -2,9 +2,19 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-    <div class="ui text container">
-        <h1>Privacy Policy</h1>
-        {{ page.render_inline_editor(editable_html_obj, current_user) }}
+<div class="Site-content ui text container">
+        <h2>Privacy Policy</h2>
+        <p>donate a mole is bound by Commonwealth and State privacy legislation, including the Privacy Act 1988 (Commonwealth) and the Information Privacy Act 2009 (Queensland). In addition, the application must adhere to the guidelines of the National Health and Medical Research Council of Australia, Medicare Australia and is also accountable to the University of Queensland-Human Research Ethics Committee.</p>
+
+        <a href="{{ url_for('main.donate') }}">
+            <div class="ui primary fluid button">donate a mole</div>
+          </a>
+
+        <footer style="text-align:center;margin-top:40px;margin-bottom:10px;">
+            <a href="{{ url_for('main.about') }}">
+                <div style="display:block;" id="footerBtnSec" class="ui primary fluid button dam secondary">about us</div>
+              </a>
+          </footer>
     </div>
 
     <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>

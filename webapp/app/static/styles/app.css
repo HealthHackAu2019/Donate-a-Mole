@@ -98,7 +98,7 @@ table.selectable tr:hover {
   width: 150px;
 }
 
-#donateRoot {
+#bodyLocRoot {
   display: none;
 }
 
@@ -194,4 +194,16 @@ h2 {
  #status-area .flash_message {
   padding: 5px;
   color: red;
+}
+
+p {
+  text-align: justify;
+}
+
+.socialgrid {
+  margin-bottom: 30px !important;
+}
+
+.socialgrid > .button {
+  height: 30px !important;
 }

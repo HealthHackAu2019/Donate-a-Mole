@@ -33,6 +33,10 @@ def randStr(stringLength=10):
   letters = string.ascii_lowercase
   return ''.join(random.choice(letters) for i in range(stringLength))
 
+@main.route('/share')
+def share():
+  return render_template('main/index.html')
+
 @main.route('/donate', methods=["GET", "POST"])
 def donate():
     form = MoleForm()
@@ -50,8 +54,9 @@ def donate():
         mole.image_path=filename
         db.session.add(mole)
         db.session.commit()
-        resp = jsonify(success=True)
-        return resp
+
+        return render_template(
+        'main/thankyou.html')
     return render_template(
         'main/donate.html', form=form)
 

@@ -1,0 +1,55 @@
+{% import 'macros/page_macros.html' as page %}
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="Site-content ui text container">
+    <h2>thank you</h2>
+    <p>Thank you for contributing towards the fight against skin cancer</p>
+    <h2>share</h2>
+    <p>Help spread awareness of skin cancer and contribute to research by sharing donate-a-mole on social media</p>
+
+    <div class="ui grid socialgrid">
+
+      <a class="four wide column" href="https://www.facebook.com/sharer/sharer.php?u=https://donateamole.org/share">
+        <div class="ui facebook button">
+          <i class="facebook icon"></i>
+        Facebook
+        </div>
+      </a>
+      
+      <a class="four wide column" href="https://twitter.com/home?status=https://donateamole.org/share I've joined the fight to beat melanoma - and you can do too #donateamole #citizenscience">
+        <div class="ui twitter button">
+          <i class="twitter icon"></i>
+          Twitter
+        </div>
+      </a>
+      
+      <a class="four wide column" href="https://www.linkedin.com/shareArticle?mini=true&url=https://donateamole.org/share&title=&summary=I've joined the fight to beat melanoma - and you can do too #donateamole #citizenscience&source=">
+        <div class="ui linkedin button">
+          <i class="linkedin icon"></i>
+          LinkedIn
+        </div>
+      </a>
+      
+      <a class="four wide column" href="mailto:info@examplescom?&cc=&bcc=&subject=Donate a mole for melanoma research&body=I've joined the fight to beat melanoma - and you can do too https://donateamole.org/share">
+        <div class="ui instagram button">
+          <i class="envelope icon"></i>
+          Send Email
+        </div>
+      </a>
+      </div>
+    
+
+        <a href="{{ url_for('main.donate') }}">
+            <div class="ui primary fluid button">donate a mole</div>
+          </a>
+
+        <footer style="text-align:center;margin-top:40px;margin-bottom:10px;">
+            <a href="{{ url_for('main.about') }}">
+                <div style="display:block;" id="footerBtnSec" class="ui primary fluid button dam secondary">about us</div>
+              </a>
+          </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+{% endblock %}

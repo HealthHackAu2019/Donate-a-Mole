@@ -10,9 +10,11 @@
         {{ form.errors }}
       {% endif %}
 
-      <div id="donateRoot">
-          <h2>Hotspot your mole</h2>
+      <div id="bodyLocRoot">
+        <h2>Hotspot your mole</h2>
+        <div id="donateRoot"></div>
       </div>
+      
       
       {% set flashes = {
           'error':   get_flashed_messages(category_filter=['form-error']),
@@ -30,12 +32,16 @@
 
       <div class="moletab 0">
         <h2>info</h2>
-        {{ lipsum(2) }}
+        <p>We are mapping melanoma hotspots on the body to improve detection of Australia’s national cancer</p>
+            <p>Step one- take a photo of a mole on your skin</p>
+            <p>Step two- map the location of the mole on your body</p>
+            <p>Get started and become a citizen scientist to fight melanoma you must be 18 years or older participate</p>
+        </p>
       </div>
 
       <div class="moletab 1">
         <h2>take a picture</h2>
-        {{ lipsum(1) }}
+        <p>Hold your phone about 20 cm from your mole When photographing the skin, orient the camera horizontally</p>
         <img class="ui fluid" id="imgpreview" src="#" alt="Upload a mole to preview" />
       </div>
 
@@ -46,8 +52,7 @@
       </div>
 
       <div class="moletab 3">
-        <h2>confirm</h2>
-        {{ lipsum(1) }}
+        <h2>add another mole</h2>
         {{ f.render_form_field(form.num_moles) }}
       </div>
 
@@ -73,21 +78,19 @@
 
       <div class="moletab 6">
         <h2>consent</h2>
-        {{ lipsum(1) }}
+        <p>I give permission for my doctors, other health professionals, hospitals, Queensland Cancer Registry or pathology laboratories outside to release information, for example pathology reports, to the University of Queensland concerning my lesion excision that is needed for this project. Additionally, I give my permission to Queensland Cancer Registry to release pathology reports regarding my previous melanoma diagnosis and other types of invasive cancers.</p>
       </div>
 
       <div class="moletab 7">
         <h2>consent</h2>
-        {{ lipsum(1) }}
+        <p>Contact details</p>
         {{ f.render_form_field(form.name) }}
         {{ f.render_form_field(form.dob) }}
         {{ f.render_form_field(form.email) }}
       </div>
 
       <div class="moletab 8">
-        <h2>thank you</h2>
-        {{ lipsum(1) }}
-        <h4>share</h4>
+        
       </div>
 
       {{ f.end_form(form) }}
@@ -226,7 +229,7 @@
         var bLoc = $("#body_location").val();
         if (bLoc) {
           console.log("bloc: " + bLoc);
-          $("#donateRoot").transition('horizontal flip', '100ms');
+          $("#bodyLocRoot").transition('horizontal flip', '100ms');
           $("#footerBtn").html('proceed');
 
           $("#footerBtnSec").html('donate another mole');
@@ -313,7 +316,7 @@
       .delay(2000)
       .transition('horizontal flip', '500ms')
     ;
-    if (n == 2) $("#donateRoot")
+    if (n == 2) $("#bodyLocRoot")
       .transition('horizontal flip', '100ms')
     ;
     fixStepIndicator(n)
