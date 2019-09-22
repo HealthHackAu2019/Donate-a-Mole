@@ -17,6 +17,38 @@ def get_suburb_state(latitude, longitude):
     except:
         return ("NA", "NA")
 
+from sqlalchemy.inspection import inspect
+
+class ModelSerializer(object):
+
+    def serialize(self):
+        return {c: getattr(self, c) for c in inspect(self).attrs.keys()}
+
+    @staticmethod
+    def serialize_list(l):
+        return [m.serialize() for m in l]
+
+def to_json(inst, cls):
+    """
+    Jsonify the sql alchemy query result.
+    """
+    convert = dict()
+    # add your coversions for things like datetime's 
+    # and what-not that aren't serializable.
+    d = dict()
+    for c in cls.__table__.columns:
+        v = getattr(inst, c.name)
+        if c.type in convert.keys() and v is not None:
+            try:
+                d[c.name] = convert[c.type](v)
+            except:
+                d[c.name] = "Error:  Failed to covert using ", str(convert[c.type])
+        elif v is None:
+            d[c.name] = str()
+        else:
+            d[c.name] = v
+    return json.dumps(d)
+
 class Sex:
     values = ['Not Specified', 'Female', 'Male']
 
@@ -32,7 +64,7 @@ class History:
 class BodyLocation:
     defaults = ["We're going to use Leaflet.JS", "With a custom map of avatar bodies", "I promise we're working on it!"]
 
-class Mole(db.Model):
+class Mole(db.Model, ModelSerializer):
     id = db.Column(db.Integer, primary_key=True)
     sex = db.Column(db.Integer)
     age = db.Column(db.Integer)
@@ -61,6 +93,19 @@ class Mole(db.Model):
         if self.date_submitted is None:
             self.date_submitted = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+    def serialize(self):
+        d = ModelSerializer.serialize(self)
+        return d
+
+    @staticmethod
+    def serialize_list(l):
+        return [m.serialize() for m in l]
+
+
+    @property
+    def json(self):
+        return to_json(self, self.__class__)
+    
     @staticmethod
     def generate_fake(count=100, **kwargs):
         """Generate a number of fake moles for testing."""

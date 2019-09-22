@@ -1,5 +1,6 @@
 .webassets-cache/
 webassets-external/
+desktop/*
 .DS_Store
 *.pyc
 *.pyo
@@ -18,3 +19,4 @@ Client Info/
 *.log
 webapp/donateSrc/node_modules
 uploads/
+*.app/

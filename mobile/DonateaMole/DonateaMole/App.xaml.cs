@@ -1,6 +1,8 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace DonateaMole
 {
@@ -10,12 +12,13 @@ namespace DonateaMole
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MolePage();
         }
 
         protected override void OnStart()
         {
             // Handle when your app starts
+
         }
 
         protected override void OnSleep()

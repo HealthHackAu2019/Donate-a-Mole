@@ -23,6 +23,10 @@
                 </div>
             </div>
 
+            <a href="{{ url_for('admin.export') }}">
+                <div class="ui primary fluid button">Export moles</div>
+              </a>
+
             {# Use overflow-x: scroll so that mobile views don't freak out
              # when the table is too wide #}
             <div style="overflow-x: scroll;">
@@ -32,10 +36,15 @@
                             <th>Date Submitted</th>
                             <th>Sex</th>
                             <th>Age</th>
+                            <th>Ancestry</th>
+                            <th>Personal History</th>
+                            <th>Family History</th>
                             <th>Body Location</th>
+                            <th>NumNaevi</th>
                             <th>Suburb</th>
                             <th>State</th>
                             <th>Image</th>
+                            <th>Contact</th>
                             <th>Pathology</th>
                         </tr>
                     </thead>
@@ -46,10 +55,15 @@
                             <td>{{ m.date_submitted }}</td>
                             <td>{{ m.sex }}</td>
                             <td>{{ m.age }}</td>
+                            <td>{{ m.ancestry }}</td>
+                            <td>{{ m.personal_history }}</td>
+                            <td>{{ m.family_history }}</td>
                             <td>{{ m.body_location }}</td>
+                            <td>{{ m.number_naevi }}</td>
                             <td>{{ m.geo_suburb }}</td>
                             <td>{{ m.geo_state }}</td>
-                            <td><img class="ui table" src="../static/{{ m.image_path }}"></td>
+                            <td><img class="ui table" src="../static/uploads/moles/{{ m.image_path }}"></td>
+                            <td>{{ m.contact_research }}</td>
                             <td>{{ m.pathology }}</td>
                             
                         </tr>

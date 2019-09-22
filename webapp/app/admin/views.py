@@ -6,6 +6,7 @@ from flask import (
     render_template,
     request,
     url_for,
+    jsonify,
 )
 from flask_login import current_user, login_required
 from flask_rq import get_queue
@@ -20,9 +21,16 @@ from app.admin.forms import (
 from app.decorators import admin_required
 from app.email import send_email
 from app.models import EditableHTML, Role, User, Mole
+import json
 
 admin = Blueprint('admin', __name__)
 
+@admin.route('/export')
+@login_required
+@admin_required
+def export():
+  moles = Mole.query.all()
+  return json.dumps(Mole.serialize_list(moles))
 
 @admin.route('/')
 @login_required
