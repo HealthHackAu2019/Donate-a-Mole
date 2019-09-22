@@ -4,8 +4,12 @@
 
 {% block content %}
   <div class="Site-content ui text container">
-<!--    <div class="eight wide computer sixteen wide mobile centered column"> -->
       <noscript>You need to enable JavaScript to run this app.</noscript>
+
+      {% if form.errors %}
+        {{ form.errors }}
+      {% endif %}
+
       <div id="donateRoot">
           <h2>Hotspot your mole</h2>
       </div>
@@ -19,8 +23,9 @@
 
       {{ f.begin_form(form, flashes) }}
 
-      <div class="hiddenfile">
+      <div class="hiddendiv">
           {{ f.render_form_field(form.image) }}
+          {{ f.render_form_field(form.contact_research) }}
       </div>
 
       <div class="moletab 0">
@@ -29,7 +34,7 @@
       </div>
 
       <div class="moletab 1">
-        <h2>Take a Picture</h2>
+        <h2>take a picture</h2>
         {{ lipsum(1) }}
         <img class="ui fluid" id="imgpreview" src="#" alt="Upload a mole to preview" />
       </div>
@@ -41,46 +46,48 @@
       </div>
 
       <div class="moletab 3">
-        <h2>Confirm</h2>
+        <h2>confirm</h2>
         {{ lipsum(1) }}
-        <button onclick="newMole()" class="ui primary fluid button">Donate another Mole</button>
+        {{ f.render_form_field(form.num_moles) }}
       </div>
 
       <div class="moletab 4">
-        <h2>Help us complete the picture</h2>
+        <h2>help us complete the picture</h2>
         {{ f.render_form_field(form.age) }}
         {{ f.render_form_field(form.sex) }}
-        {{ f.render_form_field(form.location) }}
-
-        <div class="field  ">
-          <input id="search-address" type="text" placeholder="Enter postcode or suburb…">
-          <i class="globabl icon"></i>
-        </div>
-
+        {{ f.render_form_field(form.geo_suburb) }}
+        {{ f.render_form_field(form.geo_state) }}
         {{ f.render_form_field(form.ancestry) }}
 
       </div>
 
       <div class="moletab 5">
-          <h2>Almost there!</h2>
+          <h2>almost there!</h2>
 
           {{ f.render_form_field(form.personal_history) }}
           {{ f.render_form_field(form.family_history) }}
           {{ f.render_form_field(form.pathology) }}
+          {{ f.render_form_field(form.number_naevi) }}
   
         </div>
 
       <div class="moletab 6">
-        <h2>Consent</h2>
+        <h2>consent</h2>
         {{ lipsum(1) }}
-        
-        <button onclick="nextPrev(1)" class="ui primary fluid button">I Disagree</button>
       </div>
 
       <div class="moletab 7">
-        <h2>Thank you</h2>
+        <h2>consent</h2>
         {{ lipsum(1) }}
-        <h4>Share</h4>
+        {{ f.render_form_field(form.name) }}
+        {{ f.render_form_field(form.dob) }}
+        {{ f.render_form_field(form.email) }}
+      </div>
+
+      <div class="moletab 8">
+        <h2>thank you</h2>
+        {{ lipsum(1) }}
+        <h4>share</h4>
       </div>
 
       {{ f.end_form(form) }}
@@ -88,6 +95,7 @@
     </div>
   </div>
 
+  <div id="status-area"></div>
   <footer style="text-align:center;margin-top:40px;margin-bottom:10px;">
     <div class="ui text container">
         <button id="footerBtnSec" onclick="nextProcessSec()" class="ui primary fluid button">Next</button>
@@ -105,72 +113,188 @@
     <span class="step"></span>
     <span class="step"></span>
   </footer>
+<!-- jquery flash message hack -->
+<script>
+    (function($) {
+      $.fn.flash_message = function(options) {
+        
+        options = $.extend({
+          text: 'Done',
+          time: 1000,
+          how: 'before',
+          class_name: ''
+        }, options);
+        
+        return $(this).each(function() {
+          if( $(this).parent().find('.flash_message').get(0) )
+            return;
+          
+          var message = $('<span />', {
+            'class': 'flash_message ' + options.class_name,
+            text: options.text
+          }).hide().fadeIn('fast');
+          
+          $(this)[options.how](message);
+          
+          message.delay(options.time).fadeOut('normal', function() {
+            $(this).remove();
+          });
+          
+        });
+      };
+  })(jQuery);
+</script>
 
 <script>
   var currentTab = 0; // Current tab is set to be the first tab (0)
   prepTab(currentTab); // Display the current tab
   var footerBtnSecHidden = true;
 
-  $('#image').on("change", function(){ 
-    $("#footerBtn").html('Submit photo');
-    $("#footerBtnSec").html('Retake photo');
-    if (footerBtnSecHidden) {
-      $("#footerBtnSec").transition('fade', '500ms');
-      footerBtnSecHidden = false;
-    }
+  function attachImageChange() {
+    $('#image').on("change", function(){ 
+      console.log("image on change");
+      var testImage = $('#image').val();
+      if (testImage) {
+        resetImage = false;
+        $("#footerBtn").html('submit photo');
+        $("#footerBtnSec").html('retake photo');
+        if (footerBtnSecHidden) {
+          $("#footerBtnSec").transition('fade', '500ms');
+          footerBtnSecHidden = false;
+        }
+      }
+    });
+  }
+
+  attachImageChange();
+
+  $('.locatorImage').on('click', function(){ 
+    console.log("locatorImage on click");
+    var molePointer = document.querySelector(".pointer");
+      molePointer.style.display = "block";
   });
 
-  function newMole() {
-    nextPrev(-2)
-  }
+  var resetImage = true;
 
   function nextProcessSec() {
     switch (currentTab) {
       case 1:
         $('#image').trigger('click'); 
         break
+      case 3:
+        resetImage = true;
+        $('#body_location').removeAttr('value');
+        $('#imgpreview').removeAttr('src');
+        
+        var molePointer = document.querySelector(".pointer");
+        //molePointer.style.display = "none";
+        
+        $("#footerBtn").html('photo of your mole');
+        $("#footerBtnSec").transition('fade', '500ms');
+        footerBtnSecHidden = true;
+        
+        nextPrev(-2)
+        break
+      case 6:
+        $('.ui.form').submit();
+        $("#footerBtn").html('return home');
+        $("#footerBtnSec").transition('fade', '500ms');
+        footerBtnSecHidden = true;
+        nextPrev(2)
+        break
     }
   }
 
   function nextProcess() {
+    console.log("currentTab: " + currentTab);
     switch (currentTab) {
       case 0:
-        $("#footerBtn").html('Photo of your Mole');
+        $("#footerBtn").html('photo of your mole');
         nextPrev(1)
         break
       case 1:
-        var fileName = $("#image").val();
-        if (fileName) {
-          $("#footerBtn").html('Confirm Mole Hotspot');
+        if (resetImage) {
+          $('#image').trigger('click');
+        } else {
+          $("#footerBtn").html('confirm mole hotspot');
           $("#footerBtnSec").transition('fade', '500ms');
           footerBtnSecHidden = true;
-          nextPrev(1)
-        } else {
-          $('#image').trigger('click');
+          nextPrev(1)          
         }
         break
       case 2:
-        $("#footerBtn").html('Proceed');
-        nextPrev(1)
+        var bLoc = $("#body_location").val();
+        if (bLoc) {
+          console.log("bloc: " + bLoc);
+          $("#donateRoot").transition('horizontal flip', '100ms');
+          $("#footerBtn").html('proceed');
+
+          $("#footerBtnSec").html('donate another mole');
+          $("#footerBtnSec").transition('fade', '500ms');
+          footerBtnSecHidden = false;
+
+          nextPrev(1);
+        } else {
+          $('#status-area').flash_message({
+            text: 'Please select a mole location',
+            how: 'append'
+        });
+      }
         break
       case 3:
-        $("#footerBtn").html('Next');
+        $("#footerBtnSec").transition('fade', '500ms');
+        footerBtnSecHidden = true;
+
+        $("#footerBtn").html('next');
         nextPrev(1)
         break
       case 4:
-        $("#footerBtn").html('Next');
-        nextPrev(1)
+        var ageVal = $("#age").val(); 
+        if ((ageVal) && ($.isNumeric(ageVal)) && (ageVal>=18)) {
+          $("#footerBtn").html('next');
+          nextPrev(1)
+        } else if ((ageVal) && ($.isNumeric(ageVal)) && (ageVal<18)) {
+          $('#status-area').flash_message({
+            text: 'Sorry, you have to be 18+',
+            how: 'append'
+          });
+        } else if ((ageVal) && !($.isNumeric(ageVal))) {
+          $('#status-area').flash_message({
+            text: 'Please enter a number for age',
+            how: 'append'
+          });
+        } else {
+          $('#status-area').flash_message({
+            text: 'Please enter your age to continue',
+            how: 'append'
+          });
+        }
         break
       case 5:
-        $("#footerBtn").html('I Agree');
+        $("#footerBtn").html('I agree: contact me');
+
+        $("#footerBtnSec").html('I disagree: donate moles anonymously');
+        $("#footerBtnSec").transition('fade', '500ms');
+        footerBtnSecHidden = false;
+
         nextPrev(1)
         break
       case 6:
-        $("#footerBtn").html('Return Home');
+        $("#footerBtn").html('donate moles!');
+        $("#contact_research").prop('checked', true);
+        
+        $("#footerBtnSec").transition('fade', '500ms');
+        footerBtnSecHidden = true;
+
         nextPrev(1)
         break
       case 7:
-        window.location.href = "{{ url_for('main.donate') }}";
+        $('.ui.form').submit();
+        $("#footerBtn").html('return home');
+        nextPrev(1)
+        break
+      case 8:
+        window.location.href = "{{ url_for('main.index') }}";
         break
     }
   }
@@ -185,76 +309,45 @@
 
   function showTab(n) {
     // This function will display the specified tab of the form ...
-    //var x = document.getElementsByClassName("moletab");
-    //x[n].style.display = "block";
     $(".moletab."+n)
       .delay(2000)
       .transition('horizontal flip', '500ms')
-      //.css("display", "block")
     ;
     if (n == 2) $("#donateRoot")
       .transition('horizontal flip', '100ms')
     ;
-    // else set 
-    // ... and run a function that displays the correct step indicator:
     fixStepIndicator(n)
   }
 
   function nextPrev(n) {
     // This function will figure out which tab to display
     var x = document.getElementsByClassName("moletab");
-    // Exit the function if any field in the current tab is invalid:
-    if (n == 1 && !validateForm()) return false;
-    // Hide the current tab:
-    //x[currentTab].style.display = "none";
+
     $(".moletab."+currentTab)
       .transition('horizontal flip')
     ;
-    if (currentTab == 2) $("#donateRoot")
-      .transition('horizontal flip', '100ms')
-    ;
-    // Increase or decrease the current tab by 1:
+    
     currentTab = currentTab + n;
-    // if you have reached the end of the form... :
+
     if (currentTab >= x.length) {
       return false;
     }
-    // Otherwise, display the correct tab:
+
     showTab(currentTab);
   }
 
-  function validateForm() {
-    // This function deals with validation of the form fields
-    var x, y, i, valid = true;
-    x = document.getElementsByClassName("moletab");
-    y = x[currentTab].getElementsByTagName("input");
-    // A loop that checks every input field in the current tab:
-    for (i = 0; i < y.length; i++) {
-      // If a field is empty...
-      if (y[i].value == "") {
-        // add an "invalid" class to the field:
-        y[i].className += " invalid";
-        // and set the current valid status to false:
-        valid = false;
-      }
-    }
-    // If the valid status is true, mark the step as finished and valid:
-    if (valid) {
-      document.getElementsByClassName("step")[currentTab].className += " finish";
-    }
-    return valid; // return the valid status
-  }
-
   function fixStepIndicator(n) {
-    // This function removes the "active" class of all steps...
     var i, x = document.getElementsByClassName("step");
     for (i = 0; i < x.length; i++) {
       x[i].className = x[i].className.replace(" active", "");
     }
-    //... and adds the "active" class to the current step:
-    x[n].className += " active";
+
+    for (i = 0; i < n; i++) {
+      x[i].className += " active";
+    }
   }
 </script>
+
 <script>
     function previewImg(input) {
       if (input.files && input.files[0]) {

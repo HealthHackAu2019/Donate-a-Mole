@@ -1,4 +1,5 @@
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask import current_app
 from itsdangerous import BadSignature, SignatureExpired
 from geopy.geocoders import OpenMapQuest
 from datetime import datetime
@@ -33,7 +34,6 @@ class BodyLocation:
 
 class Mole(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     sex = db.Column(db.Integer)
     age = db.Column(db.Integer)
     ancestry = db.Column(db.Integer)
@@ -47,6 +47,9 @@ class Mole(db.Model):
     image_path = db.Column(db.String(64))
     pathology = db.Column(db.String(2048))
     contact_research = db.Column(db.Boolean)
+    name = db.Column(db.String(64))
+    dob = db.Column(db.String(64))
+    email = db.Column(db.String(64))
     number_naevi = db.Column(db.Integer)
     date_submitted = db.Column(db.String(16))
 

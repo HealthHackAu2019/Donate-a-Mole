@@ -8,6 +8,8 @@ from flask_mail import Mail
 from flask_rq import RQ
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
+from flask_uploads import UploadSet, IMAGES, configure_uploads
+imageSet = UploadSet('imageSet', IMAGES)
 
 from app.assets import app_css, app_js, vendor_css, vendor_js
 from config import config as Config
@@ -43,6 +45,10 @@ def create_app(config):
     # not using sqlalchemy event system, hence disabling it
 
     Config[config_name].init_app(app)
+
+    # Set up uploads
+    app.config['UPLOADED_IMAGESET_DEST'] = './static/uploads/'
+    configure_uploads(app, (imageSet,))
 
     # Set up extensions
     mail.init_app(app)

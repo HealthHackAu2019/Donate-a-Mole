@@ -2,12 +2,22 @@
 
 {% block content %}
   <div class="Site-content ui text container">
-      <h2>get started</h1>
+      <h2>get started</h2>
 
-       <p>{{ lipsum(1) }}</p>
+      <p>{{ lipsum(1) }}</p>
 
-       <a href="{{ url_for('main.donate') }}">
-        <div class="ui primary fluid button">Donate a Mole</div>
+      <a href="{{ url_for('main.donate') }}">
+        <div class="ui primary fluid button">donate a mole</div>
+      </a>
+      <footer style="text-align:center;margin-top:40px;margin-bottom:10px;">
+          <a href="{{ url_for('main.about') }}">
+              <div style="display:block;" id="footerBtnSec" class="ui primary fluid button dam secondary">about us</div>
+            </a>
+            <a href="{{ url_for('main.privacy') }}">
+                <div id="footerBtnS" class="ui primary fluid button dam secondary">privacy policy</div>
+              </a>
+        </footer>
+        
       </a>
     </div>
 {% endblock %}

@@ -24,7 +24,7 @@ const Locator = ({ gender, orientation }) => {
 
     setPointerX(relX);
     setPointerY(relY);
-    setPointerD('block')
+    setPointerD('block');
 
     console.log('mole X: ', relX - (parentEl.current.offsetWidth / 2));
     console.log('mole Y: ', relY - (parentEl.current.offsetHeight / 2));
@@ -40,8 +40,14 @@ const Locator = ({ gender, orientation }) => {
     const bodyLocationField = document.getElementById('body_location');
     const bodyImageField = document.getElementById('body_image');
 
-    if (bodyLocationField) bodyLocationField.value = `${bodyX}, ${bodyY}`;
-    if (bodyImageField) bodyImageField.value = `${gender}-${orientation}`;
+    if (bodyLocationField){
+      bodyLocationField.value = `${bodyX}, ${bodyY}`;
+      var event = new Event('input', { bubbles: true });
+      bodyLocationField.dispatchEvent(event);
+    }
+    if (bodyImageField) {
+      bodyImageField.value = `${gender}-${orientation}`;
+    }
   };
 
   return (

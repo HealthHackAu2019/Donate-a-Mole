@@ -47,7 +47,6 @@
 * live counter of all moles on body map on homepage
 * Use geo data to get UV rating for current location
   * methods to match?
-* image upload filter (investigate at least)
 * User auth desired but not required
 
 ### Analysis side
@@ -138,3 +137,18 @@ honcho start -e config.env -f Local
 * sex
 * age
 * location
+
+
+## Plan of attack
+* Fix remaining components for tab 2
+* Add hooks to fill form fields
+* Location!
+* UI
+* Nav bars
+* Proper words
+* update form to make bodyLoc and image arrays
+* handle submit
+* Share code
+* Apps!!!
+
+* make new react component for
